@@ -4,10 +4,12 @@ import com.mycompany.note.domain.model.Note;
 import com.mycompany.note.inbound.v1.models.CreateNoteRequest;
 import com.mycompany.note.inbound.v1.models.NoteResponse;
 import com.mycompany.note.inbound.v1.models.UpdateNoteRequest;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class NoteMapper {
     public Note mapCreate(CreateNoteRequest request) {
         return Note.builder()

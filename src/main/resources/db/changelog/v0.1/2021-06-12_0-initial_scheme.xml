@@ -11,6 +11,9 @@
       <column name="id" type="bigint" autoIncrement="true">
         <constraints primaryKey="true"/>
       </column>
+      <column name="ownerId" type="bigint">
+        <constraints nullable="false"/>
+      </column>
       <column name="title" type="varchar(255)">
         <constraints nullable="false"/>
       </column>
@@ -44,28 +47,11 @@
       </column>
     </createTable>
 
-    <createTable tableName="user_note">
-      <column name="user_id" type="bigint">
-        <constraints nullable="false"/>
-      </column>
-      <column name="note_id" type="bigint">
-        <constraints nullable="false"/>
-      </column>
-    </createTable>
-    <addPrimaryKey tableName="user_note"
-                   columnNames="user_id, note_id"
-                   constraintName="pk_user_note"/>
     <addForeignKeyConstraint baseTableName="user_note"
-                             baseColumnNames="user_id"
+                             baseColumnNames="owner_id"
                              constraintName="user-note_user_id_fk"
                              referencedTableName="user"
                              referencedColumnNames="id"/>
-    <addForeignKeyConstraint baseTableName="user_note"
-                             baseColumnNames="note_id"
-                             constraintName="user_note_note_id_fk"
-                             referencedTableName="note"
-                             referencedColumnNames="id"/>
-
     <createIndex tableName="users" indexName="user_email_idx">
       <column name="email"/>
     </createIndex>
