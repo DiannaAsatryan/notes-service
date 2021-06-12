@@ -1,1 +1,1 @@
-# notes-service
+# notes-com.mycompany.note.domain.service
