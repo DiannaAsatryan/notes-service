@@ -8,11 +8,12 @@
   <changeSet id="0.0.0.2" author="DianaAs" failOnError="true">
     <comment>Add users</comment>
     <insert tableName="user">
-      <column name="password" value="test"/>
+      <column name="password" value="$2y$12$OuEXyvcVZ5vP/sTMpZTbVOgDdSnus.G7cUGmlwxMl0GAlhVWi31C6"/>
       <column name="email" value="diana.asatryan@gmail.com"/>
+
     </insert>
     <insert tableName="user">
-      <column name="password" value="test"/>
+      <column name="password" value="$2y$12$OuEXyvcVZ5vP/sTMpZTbVOgDdSnus.G7cUGmlwxMl0GAlhVWi31C6"/>
       <column name="email" value="diana.asatryan_1@gmail.com"/>
     </insert>
   </changeSet>

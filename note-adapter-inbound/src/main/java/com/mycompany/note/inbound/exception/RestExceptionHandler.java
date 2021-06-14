@@ -1,6 +1,6 @@
 package com.mycompany.note.inbound.exception;
 
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import com.mycompany.note.domain.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

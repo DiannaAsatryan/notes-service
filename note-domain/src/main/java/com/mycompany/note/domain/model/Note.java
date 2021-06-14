@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @Builder
 public class Note {
-    long id;
+    Long id;
     String title;
     String note;
-
+    Long ownerId = 1l;
 }

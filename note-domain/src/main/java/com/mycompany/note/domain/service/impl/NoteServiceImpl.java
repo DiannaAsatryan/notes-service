@@ -1,25 +1,25 @@
 package com.mycompany.note.domain.service.impl;
 
+import com.mycompany.note.domain.exception.ResourceNotFoundException;
 import com.mycompany.note.domain.model.Note;
 import com.mycompany.note.domain.model.enums.ResourceType;
 import com.mycompany.note.domain.repository.NoteRepository;
 import com.mycompany.note.domain.service.NoteService;
-import com.mycompany.note.domain.exception.ResourceNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class NoteServiceImpl implements NoteService {
 
     @Autowired
     NoteRepository noteRepository;
 
     /**
-     * Return note by id ResourceNotFoundException will be thrown if note not found in database by given
-     * noteId
+     * Return note by id
+     * ResourceNotFoundException will be thrown if note not found in database by given noteId
      *
      * @param noteId Id of note which need to be retrieved
      * @return Note
@@ -54,11 +54,11 @@ public class NoteServiceImpl implements NoteService {
     }
 
     /**
-     * Update note in database, only fields present in UpdatenoteRequest will be changed
+     * Update note in database
      * Throws ResourceNotFoundException if note not found in database by given noteId
      *
-     * @param noteId Id of note which need to be updated
-     * @param noteRequest   Note model contents note information
+     * @param noteId      Id of note which need to be updated
+     * @param noteRequest Note model contents note information
      * @return note
      */
     @Override

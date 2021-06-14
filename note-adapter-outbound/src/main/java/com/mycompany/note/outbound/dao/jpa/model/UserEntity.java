@@ -14,7 +14,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", schema = "public")
+
 @Data
 @NoArgsConstructor
 @ToString(exclude = "password")
@@ -29,6 +30,7 @@ public class UserEntity {
 
     @Size(min = 8)
     private String password;
+
     private Long createdAt = System.currentTimeMillis();
     private Long updatedAt = System.currentTimeMillis();
 

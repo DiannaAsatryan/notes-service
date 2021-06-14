@@ -6,34 +6,38 @@
         <artifactId>notes</artifactId>
         <groupId>com.mycompany.notes</groupId>
         <version>0.0.1-SNAPSHOT</version>
-        <!--relativePath>../pom.xml</relativePath-->
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>note-adapter-outbound</artifactId>
+    <artifactId>note</artifactId>
     <packaging>jar</packaging>
-<!--    <properties>-->
-<!--        <spring-boot.repackage.skip>true</spring-boot.repackage.skip>-->
-<!--    </properties>-->
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <artifactId>note-domain</artifactId>
-            <groupId>com.mycompany.notes</groupId>
-            <version>${project.parent.version}</version>
-        </dependency>
-    </dependencies>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <classifier>exe</classifier>
+                    <skip>false</skip>
+                    <mainClass>com.mycompany.note.NotesApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+<dependencies>
+    <dependency>
+        <artifactId>note-domain</artifactId>
+        <groupId>com.mycompany.notes</groupId>
+        <version>${project.parent.version}</version>
+    </dependency>
+    <dependency>
+        <artifactId>note-adapter-inbound</artifactId>
+        <groupId>com.mycompany.notes</groupId>
+        <version>${project.parent.version}</version>
+    </dependency>
+    <dependency>
+        <artifactId>note-adapter-outbound</artifactId>
+        <groupId>com.mycompany.notes</groupId>
+        <version>${project.parent.version}</version>
+    </dependency>
+</dependencies>
+
 </project>

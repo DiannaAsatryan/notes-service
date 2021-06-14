@@ -5,6 +5,7 @@ import com.mycompany.note.inbound.v1.mapper.NoteMapper;
 import com.mycompany.note.inbound.v1.models.CreateNoteRequest;
 import com.mycompany.note.inbound.v1.models.UpdateNoteRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -25,6 +26,7 @@ public class NoteController {
     NoteService noteService;
 
     @Autowired
+    @Qualifier("inboundNoteMapper")
     NoteMapper noteMapper;
 
     @GetMapping("/{noteId}")
@@ -41,7 +43,8 @@ public class NoteController {
     public ResponseEntity<?> updateNote(@PathVariable(value = "noteId") Long noteId,
         @RequestBody @Validated UpdateNoteRequest noteRequest)
     {
-        return ResponseEntity.ok(noteMapper.mapResponse(noteService.updateNote(noteId, noteMapper.mapUpdate(noteRequest))));
+        return ResponseEntity
+            .ok(noteMapper.mapResponse(noteService.updateNote(noteId, noteMapper.mapUpdate(noteRequest))));
     }
 
     @PostMapping
