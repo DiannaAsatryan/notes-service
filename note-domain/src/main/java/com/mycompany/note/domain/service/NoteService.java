@@ -1,21 +1,20 @@
 package com.mycompany.note.domain.service;
 
 import com.mycompany.note.domain.model.Note;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 public interface NoteService {
 
-    List<Note> getAllNotes(long userId);
+    List<Note> getAllNotes(String userName);
 
-    Note getNote(long noteId);
+    Note getNote(String userName, long noteId);
 
-    Note createNote(Note note);
+    Note createNote(String userName, Note note);
 
-    Note updateNote(long noteId, Note note);
+    Note updateNote(String userName, long noteId, Note note);
 
-    void removeNote(long noteId);
+    void removeNote(String userName, long noteId);
 
 
 }

@@ -7,13 +7,13 @@ import lombok.Value;
 @Value
 public class ErrorResponse {
 
-  public static enum ErrorCode{
-    VALIDATION_ERROR,
-    INTERNAL_ERROR,
-    NO_RESOURCE_FOUND
-  }
+    public static enum ErrorCode {
+        VALIDATION_ERROR,
+        INTERNAL_ERROR,
+        NO_RESOURCE_FOUND
+    }
 
-  private ErrorCode code;
-  private String message;
+    private ErrorCode code;
+    private String message;
 
 }

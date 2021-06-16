@@ -1,26 +1,21 @@
 spring:
   datasource:
-   # url: ${DB_URI:jdbc:postgresql://localhost:5432/notesdb}
-    url: ${DB_URI:jdbc:postgresql://dbpostgresql:5432/notesdb}
+    url: ${DB_URI:jdbc:postgresql://localhost:5432/notesdb}
+   # url: ${DB_URI:jdbc:postgresql://dbpostgresql:5432/notesdb}
     username: ${DB_USER:postgres}
     password: ${DB_PASSWORD:root}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      naming.physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
      # ddl-auto: create
     properties:
       hibernate:
         id.new_generator_mappings: false
-        jdbc.batch_size: 30
-        order_inserts: true
-        order_updates: true
         show_sql: true
     open-in-view: false
     database: postgresql
-  jackson.serialization.write-dates-as-timestamps: false
   liquibase:
-    enabled: false
+    enabled: true
     change-log: classpath:db-changelog/changelog.xml
 
 management:

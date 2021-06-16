@@ -7,12 +7,12 @@ import java.util.Optional;
 
 public interface NoteRepository {
 
-    Optional<Note> findById(long noteId);
+    Optional<Note> findById(String userName, long noteId);
 
-    List<Note> findAll(long userId);
+    List<Note> findAll(String userName);
 
-    Note save(Note note);
+    Note save(String userName, Note note);
 
-    void deleteById(long noteId);
+    void deleteById(String userName, long noteId);
 
 }

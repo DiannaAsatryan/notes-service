@@ -18,8 +18,8 @@
             <column name="password" type="varchar(512)">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_at" type="bigint"/>
-            <column name="updated_at" type="bigint"/>
+            <column name="created_at" type="datetime" defaultValue="now()"/>
+            <column name="updated_at" type="datetime" defaultValue="now()"/>
         </createTable>
 
         <comment>Create note table</comment>
@@ -36,8 +36,8 @@
             <column name="note" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_at" type="bigint"/>
-            <column name="updated_at" type="bigint"/>
+            <column name="created_at" type="datetime" defaultValue="now()"/>
+            <column name="updated_at" type="datetime" defaultValue="now()"/>
         </createTable>
 
         <addForeignKeyConstraint baseTableName="note"

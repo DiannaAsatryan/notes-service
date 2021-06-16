@@ -27,7 +27,6 @@ public class NoteMapper {
         return Note.builder()
             .id(note.getId())
             .title(note.getTitle())
-            .ownerId(note.getOwner().getId())
             .note(note.getNote())
             .build();
     }

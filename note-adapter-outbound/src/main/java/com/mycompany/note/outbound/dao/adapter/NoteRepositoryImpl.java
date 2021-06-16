@@ -5,7 +5,8 @@ import com.mycompany.note.domain.model.Note;
 import com.mycompany.note.domain.repository.NoteRepository;
 import com.mycompany.note.outbound.dao.jpa.model.NoteEntity;
 import com.mycompany.note.outbound.dao.jpa.model.UserEntity;
-import com.mycompany.note.outbound.dao.jpa.repository.UserRepository;
+import com.mycompany.note.outbound.dao.jpa.repository.NoteRepositoryJpa;
+import com.mycompany.note.outbound.dao.jpa.repository.UserRepositoryJpa;
 import com.mycompany.note.outbound.dao.mapper.NoteMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,23 +20,25 @@ public class NoteRepositoryImpl implements NoteRepository {
     @Autowired
     NoteMapper mapper;
 
-    @Autowired com.mycompany.note.outbound.dao.jpa.repository.NoteRepository noteRepository;
+    @Autowired
+    NoteRepositoryJpa noteRepository;
 
-    @Autowired UserRepository userRepository;
+    @Autowired
+    UserRepositoryJpa userRepository;
 
     @Override
-    public Optional<Note> findById(long noteId) {
-        return noteRepository.findById(noteId).map(mapper::convertFrom);
+    public Optional<Note> findById(String userName, long noteId) {
+        return noteRepository.findByIdAndUserName(noteId, userName).map(mapper::convertFrom);
     }
 
     @Override
-    public List<Note> findAll(long userId) {
-        return mapper.convertFrom(noteRepository.findByOwnerId(userId));
+    public List<Note> findAll(String userName) {
+        return mapper.convertFrom(noteRepository.findByUser(userName));
     }
 
     @Override
-    public Note save(Note note) {
-        Optional<UserEntity> owner = userRepository.findById(note.getOwnerId());
+    public Note save(String userName, Note note) {
+        Optional<UserEntity> owner = userRepository.findByEmail(userName);
         if (owner.isEmpty()) {
             throw new RepositoryExtension("Note's owner not found");
         }
@@ -44,7 +47,7 @@ public class NoteRepositoryImpl implements NoteRepository {
     }
 
     @Override
-    public void deleteById(long noteId) {
-        noteRepository.deleteById(noteId);
+    public void deleteById(String userName, long noteId) {
+        noteRepository.deleteByUserNameAndId(userName, noteId);
     }
 }

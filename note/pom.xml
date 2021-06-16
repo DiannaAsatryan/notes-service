@@ -22,22 +22,22 @@
             </plugin>
         </plugins>
     </build>
-<dependencies>
-    <dependency>
-        <artifactId>note-domain</artifactId>
-        <groupId>com.mycompany.notes</groupId>
-        <version>${project.parent.version}</version>
-    </dependency>
-    <dependency>
-        <artifactId>note-adapter-inbound</artifactId>
-        <groupId>com.mycompany.notes</groupId>
-        <version>${project.parent.version}</version>
-    </dependency>
-    <dependency>
-        <artifactId>note-adapter-outbound</artifactId>
-        <groupId>com.mycompany.notes</groupId>
-        <version>${project.parent.version}</version>
-    </dependency>
-</dependencies>
+    <dependencies>
+        <dependency>
+            <artifactId>note-domain</artifactId>
+            <groupId>com.mycompany.notes</groupId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>note-adapter-inbound</artifactId>
+            <groupId>com.mycompany.notes</groupId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>note-adapter-outbound</artifactId>
+            <groupId>com.mycompany.notes</groupId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

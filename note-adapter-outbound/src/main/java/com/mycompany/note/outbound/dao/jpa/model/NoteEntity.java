@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "note")
@@ -36,11 +37,11 @@ public class NoteEntity {
     private String note;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name="owner_id")
+    @JoinColumn(name = "owner_id")
     private UserEntity owner;
 
-    private Long createdAt = System.currentTimeMillis();
-    private Long updatedAt = System.currentTimeMillis();
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public NoteEntity(String title, String note,
         UserEntity owner)
@@ -48,6 +49,5 @@ public class NoteEntity {
         this.title = title;
         this.note = note;
         this.owner = owner;
-        this.createdAt = this.updatedAt = System.currentTimeMillis();
     }
 }

@@ -17,17 +17,19 @@ public class NoteServiceImpl implements NoteService {
     @Autowired
     NoteRepository noteRepository;
 
+
     /**
      * Return note by id
      * ResourceNotFoundException will be thrown if note not found in database by given noteId
      *
-     * @param noteId Id of note which need to be retrieved
+     * @param userName User name of logged in user
+     * @param noteId   Id of note which need to be retrieved
      * @return Note
      */
-    public Note getNote(long noteId) {
-        Optional<Note> note = noteRepository.findById(noteId);
+    public Note getNote(String userName, long noteId) {
+        Optional<Note> note = noteRepository.findById(userName, noteId);
         if (!note.isPresent()) {
-            throw new ResourceNotFoundException(ResourceType.note, noteId);
+            throw new ResourceNotFoundException(ResourceType.note, String.valueOf(noteId));
         }
         return note.get();
     }
@@ -35,53 +37,58 @@ public class NoteServiceImpl implements NoteService {
     /**
      * Get all notes
      *
+     * @param userName User name of logged in user
      * @return List<Note>
      */
     @Override
-    public List<Note> getAllNotes(long userId) {
-        return noteRepository.findAll(userId);
+    public List<Note> getAllNotes(String userName) {
+        return noteRepository.findAll(userName);
     }
 
     /**
      * Create new note by give request model
      *
-     * @param note Note model contents note information
+     * @param userName User name of logged in user
+     * @param note     Note model contents note information
      * @return note
      */
     @Override
-    public Note createNote(Note note) {
-        return noteRepository.save(note);
+    public Note createNote(String userName, Note note) {
+
+        return noteRepository.save(userName, note);
     }
 
     /**
      * Update note in database
      * Throws ResourceNotFoundException if note not found in database by given noteId
      *
+     * @param userName    User name of logged in user
      * @param noteId      Id of note which need to be updated
      * @param noteRequest Note model contents note information
      * @return note
      */
     @Override
-    public Note updateNote(long noteId, Note noteRequest)
+    public Note updateNote(String userName, long noteId, Note noteRequest)
         throws ResourceNotFoundException
     {
-        Optional<Note> noteOpt = noteRepository.findById(noteId);
+        Optional<Note> noteOpt = noteRepository.findById(userName, noteId);
         if (!noteOpt.isPresent()) {
-            throw new ResourceNotFoundException(ResourceType.note, noteId);
+            throw new ResourceNotFoundException(ResourceType.note, String.valueOf(noteId));
         }
         Note note = noteOpt.get();
         note.setTitle(noteRequest.getTitle());
         note.setNote(noteRequest.getNote());
-        return noteRepository.save(note);
+        return noteRepository.save(userName, note);
     }
 
     /**
      * Remove note from database
      *
-     * @param noteId Id of note which need to be removed
+     * @param userName User name of logged in user
+     * @param noteId   Id of note which need to be removed
      */
     @Override
-    public void removeNote(long noteId) {
-        noteRepository.deleteById(noteId);
+    public void removeNote(String userName, long noteId) {
+        noteRepository.deleteById(userName, noteId);
     }
 }

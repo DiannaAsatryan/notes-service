@@ -9,5 +9,4 @@ public class Note {
     Long id;
     String title;
     String note;
-    Long ownerId = 1l;
 }

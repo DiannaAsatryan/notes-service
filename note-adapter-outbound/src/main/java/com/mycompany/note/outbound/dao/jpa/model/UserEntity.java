@@ -12,10 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user", schema = "public")
-
 @Data
 @NoArgsConstructor
 @ToString(exclude = "password")
@@ -31,8 +31,8 @@ public class UserEntity {
     @Size(min = 8)
     private String password;
 
-    private Long createdAt = System.currentTimeMillis();
-    private Long updatedAt = System.currentTimeMillis();
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public UserEntity(String email, String password) {
         this.email = email;

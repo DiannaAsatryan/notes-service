@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/api/v1/note")
 public class NoteController {
@@ -30,32 +32,34 @@ public class NoteController {
     NoteMapper noteMapper;
 
     @GetMapping("/{noteId}")
-    public ResponseEntity<?> getNoteById(@PathVariable(value = "noteId") Long noteId) {
-        return ResponseEntity.ok(noteService.getNote(noteId));
+    public ResponseEntity<?> getNoteById(Principal principal, @PathVariable(value = "noteId") Long noteId) {
+        return ResponseEntity.ok(noteService.getNote(principal.getName(), noteId));
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllNotes() {
-        return ResponseEntity.ok(noteMapper.mapResponse(noteService.getAllNotes(1)));
+    public ResponseEntity<?> getAllNotes(Principal principal) {
+        return ResponseEntity.ok(noteMapper.mapResponse(noteService.getAllNotes(principal.getName())));
     }
 
     @PutMapping("/{noteId}")
-    public ResponseEntity<?> updateNote(@PathVariable(value = "noteId") Long noteId,
+    public ResponseEntity<?> updateNote(Principal principal, @PathVariable(value = "noteId") Long noteId,
         @RequestBody @Validated UpdateNoteRequest noteRequest)
     {
         return ResponseEntity
-            .ok(noteMapper.mapResponse(noteService.updateNote(noteId, noteMapper.mapUpdate(noteRequest))));
+            .ok(noteMapper
+                .mapResponse(noteService.updateNote(principal.getName(), noteId, noteMapper.mapUpdate(noteRequest))));
     }
 
     @PostMapping
-    public ResponseEntity<?> createNote(@RequestBody @Validated CreateNoteRequest noteRequest) {
+    public ResponseEntity<?> createNote(Principal principal, @RequestBody @Validated CreateNoteRequest noteRequest) {
         return ResponseEntity.status(HttpStatus.CREATED)
-            .body(noteMapper.mapResponse(noteService.createNote(noteMapper.mapCreate(noteRequest))));
+            .body(
+                noteMapper.mapResponse(noteService.createNote(principal.getName(), noteMapper.mapCreate(noteRequest))));
     }
 
     @DeleteMapping("/{noteId}")
-    public void removeNote(@PathVariable(value = "noteId") Long noteId) {
-        noteService.removeNote(noteId);
+    public void removeNote(Principal principal, @PathVariable(value = "noteId") Long noteId) {
+        noteService.removeNote(principal.getName(), noteId);
     }
 
 }
